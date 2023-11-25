@@ -11,7 +11,7 @@ public class Cells1 {
   public static CyclicBarrier cyclicBarrier;
   public static int N; //кількість клітинок
   public static int K; //кількість атомів домішок
-  public static double p; //вірогідність переходу праворуч
+  public static double p; //вірогідність переходу ліворуч
 
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
@@ -29,15 +29,15 @@ public class Cells1 {
       crystalCells[i] = new AtomicInteger(0);
     }
     cyclicBarrier = new CyclicBarrier(K, Cells1::printData);
-    threadsStarted = System.currentTimeMillis();
+//    threadsStarted = System.currentTimeMillis();
     for (int i = 0; i < K; i++) {
       new Impurity1().start();
     }
   }
 
   private static void printData() {
-    threadsStopped = System.currentTimeMillis();
-    System.out.println("Час на операцію: " + (threadsStopped - threadsStarted) + " мілісекунд");
+//    threadsStopped = System.currentTimeMillis();
+//    System.out.println("Час на операцію: " + (threadsStopped - threadsStarted) + " мілісекунд");
     AtomicInteger[] crystalSnapshot = new AtomicInteger[N];
     for (int i = 0; i < N; i++) {
       crystalSnapshot[i] = new AtomicInteger();
@@ -50,6 +50,6 @@ public class Cells1 {
     System.out.println(java.util.Arrays.toString(crystalSnapshot));
     System.out.println("Кількість домішок: " + sum);
     System.out.println();
-    threadsStarted = System.currentTimeMillis();
+//    threadsStarted = System.currentTimeMillis();
   }
 }

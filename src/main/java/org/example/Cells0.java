@@ -8,6 +8,7 @@ public class Cells0 {
   static long threadsStopped;
   public static Integer[] crystalCells;
   public static CyclicBarrier cyclicBarrier;
+  public static boolean isRunning;
   public static int N; //кількість клітинок
   public static int K; //кількість атомів домішок
   public static double p; //вірогідність переходу праворуч
@@ -32,11 +33,19 @@ public class Cells0 {
     for (int i = 0; i < K; i++) {
       new Impurity0().start();
     }
+    for (int i = 0; i < 5; i++) {
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+      isRunning = false;
+    }
   }
 
   private static void printData() {
-    threadsStopped = System.currentTimeMillis();
-    System.out.println("Час на операцію: " + (threadsStopped - threadsStarted) + " мілісекунд");
+//    threadsStopped = System.currentTimeMillis();
+//    System.out.println("Час на операцію: " + (threadsStopped - threadsStarted) + " мілісекунд");
     Integer[] crystalSnapshot = new Integer[N];
     System.arraycopy(crystalCells, 0, crystalSnapshot, 0, N);
     int sum = 0;
@@ -46,6 +55,7 @@ public class Cells0 {
     System.out.println(java.util.Arrays.toString(crystalSnapshot));
     System.out.println("Кількість домішок: " + sum);
     System.out.println();
-    threadsStarted = System.currentTimeMillis();
+    isRunning = true;
+//    threadsStarted = System.currentTimeMillis();
   }
 }
